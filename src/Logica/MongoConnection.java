@@ -7,12 +7,6 @@ package Logica;
 //imports necesario para conectar la aplicacion con Mongo
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.BasicDBObjectBuilder;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
@@ -145,58 +139,154 @@ public class MongoConnection {
     
     /**
      * Metodo que leer la información del objeto pelicula en la base Cine de MongoDB
-     * @param pelicula, un objeto de tipo pelicula
-     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     * @param pelicula, un documento JSON con informacion de pelicula
+     * @return FindIterable<Document>, la lista de los elementos encontrados
      */    
-    public boolean leerPelicula(Pelicula pelicula){
-         boolean exito = true;
+    public FindIterable<Document> leerPelicula(Document pelicula){
+         FindIterable<Document> F = null;
         
         try {
             MongoDatabase dbs = creaMongoClient();
         
-            Document doc = createDBObjectPelicula(pelicula);
             MongoCollection col = dbs.getCollection("Peliculas");
         
-            FindIterable<Document> F = col.find();
+            F = col.find(pelicula);
             
             for (Document docs : F) {
                 System.out.print(docs.toString());
             }
         } catch (Exception e) {
-            exito = false;
         }
 
         mongoClient.close();
-        return exito;
+        return F;
     }//Fin del metodo leerPelicula
     
     /**
      * Metodo que leer la información del objeto Compania en la base Cine de MongoDB
-     * @param compania , un objeto de tipo Compania
-     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     * @param compania , es un documento JSON con elementos de la clase Compania
+     * @return FindIterabl<Document>, la lista de los elementos encontrados
      */    
-    public boolean leerCompania(Compania compania){
-         boolean exito = true;
+    public FindIterable<Document> leerCompania(Document compania){
+        FindIterable<Document> F = null;
         
         try {
             MongoDatabase dbs = creaMongoClient();
         
-            Document doc = createDBObjectCompania(compania);
             MongoCollection col = dbs.getCollection("Companias");
         
-            FindIterable<Document> F = col.find();
+            F = col.find(compania);
             
             for (Document docs : F) {
                 System.out.print(docs.toString());
             }
 
         } catch (Exception e) {
+        }
+
+        mongoClient.close();
+        return F;
+    }//Fin del metodo leerCompania
+    
+    /**
+     * Metodo que leer la información del objeto pelicula en la base Cine de MongoDB
+     * @return FindIterabl<Document>, la lista de los elementos encontrados
+     */    
+    public FindIterable<Document> leerTodoPelicula(){
+         FindIterable<Document> F = null;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            MongoCollection col = dbs.getCollection("Peliculas");
+        
+            F = col.find();
+            
+            for (Document docs : F) {
+                System.out.print(docs.toString());
+            }
+        } catch (Exception e) {
+        }
+
+        mongoClient.close();
+        return F;
+    }//Fin del metodo leerTodoPelicula
+    
+    /**
+     * Metodo que leer la información del objeto Compania en la base Cine de MongoDB
+     * @return FindIterabl<Document>, la lista de los elementos encontrados
+     */    
+    public FindIterable<Document> leerTodoCompania(){
+         FindIterable<Document> F= null;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            MongoCollection col = dbs.getCollection("Companias");
+        
+            F = col.find();
+            
+            for (Document docs : F) {
+                System.out.print(docs.toString());
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        mongoClient.close();
+        return F;
+    }//Fin del metodo leerTodoCompania
+    
+    /**
+     * Metodo que actualiza la información del objeto Pelicula en la base Cine de MongoDB
+     * @param pelicula , es un objeto de tipo Pelicula
+     * @param querry, un Document JSON que contiene la informacion de una Pelicula
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean actualizarPelicula(Compania pelicula, Document querry){
+        boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+            
+            Document doc = createDBObjectCompania(pelicula);
+            MongoCollection col = dbs.getCollection("Peliculas");
+        
+            col.updateOne(querry, doc);
+            
+        } catch (Exception e) {
             exito = false;
         }
 
         mongoClient.close();
         return exito;
-    }//Fin del metodo leerCompania
+    }//Fin del metodo actualizarPelicula
+    
+    /**
+     * Metodo que actualiza la información del objeto Compania en la base Cine de MongoDB
+     * @param compania , es un objeto de tipo Compania
+     * @param querry, un Document JSON que contiene la informacion de una Compania
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean actualizarCompania(Compania compania, Document querry){
+        boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+            
+            Document doc = createDBObjectCompania(compania);
+            MongoCollection col = dbs.getCollection("Companias");
+        
+            col.updateOne(querry, doc);
+            
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo actualizarCompania
     
     /**
      * Metedo que crea un Document
