@@ -15,8 +15,10 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*MongoConnection MC = new MongoConnection();
-        List<String> Actores = Arrays.asList("Robert Downey Jr",
+        MongoConnection MC = new MongoConnection();
+        
+        Compania C = new Compania("Mavel Studios", 1993);
+        /*List<String> Actores = Arrays.asList("Robert Downey Jr",
                 "Chris Hemsworth",
                 "Mark Ruffalo",
                 "Chris Evans",
@@ -41,6 +43,7 @@ public class Principal {
         
         MC.guardarPelicula(P);
     */
-    }
+        MC.leerCompania(C);
+    }//Fin del metodo main
 
-}
+}//Fin  de la clase principal

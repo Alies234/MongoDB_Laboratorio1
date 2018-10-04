@@ -13,6 +13,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
@@ -26,6 +27,8 @@ import org.bson.Document;
 
 public class MongoConnection {
 
+    private MongoClient mongoClient;
+    
     /**
     *Contructor de la clase
     */
@@ -38,7 +41,7 @@ public class MongoConnection {
      */
     public MongoDatabase creaMongoClient(){
      
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+        this.mongoClient = new MongoClient( "localhost" , 27017 );
         System.out.println("La conexion con el servidor fue exitosa");
         
         //Connecting with database
@@ -48,8 +51,13 @@ public class MongoConnection {
         return dbs;
     }//Fin del metodo creaMongoClient
     
+    /**
+     * Metodo que guarda la información del objeto pelicula en la base Cine de MongoDB
+     * @param pelicula, un objeto de tipo pelicula
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */
     public boolean guardarPelicula(Pelicula pelicula){
-        boolean exito = false;
+        boolean exito = true;
         
         try {
             MongoDatabase dbs = creaMongoClient();
@@ -58,19 +66,142 @@ public class MongoConnection {
             MongoCollection col = dbs.getCollection("Peliculas");
         
             col.insertOne(doc);
-            exito = true;
         } catch (Exception e) {
-            System.out.println("ERROR: " + e.toString());
+            exito = false;
         }
 
-        
+        mongoClient.close();
         return exito;
-    }
+    }//Fin del metodo guardarPelicula
     
     /**
-     * Metedo que crea un DBObject
+     * Metodo que guarda la información del objeto Compania en la base Cine de MongoDB
+     * @param compania, un objeto de tipo Compania
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */
+    public boolean guardarCompania(Compania compania){
+        boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            Document doc = createDBObjectCompania(compania);
+            MongoCollection col = dbs.getCollection("Companias");
+        
+            col.insertOne(doc);
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo guardarCompania
+    
+    /**
+     * Metodo que elimina la información del objeto pelicula en la base Cine de MongoDB
+     * @param pelicula, un objeto de tipo pelicula
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean borrarPelicula(Pelicula pelicula){
+         boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            Document doc = createDBObjectPelicula(pelicula);
+            MongoCollection col = dbs.getCollection("Peliculas");
+        
+            col.deleteOne(doc);
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo borrarPelicula
+    
+    /**
+     * Metodo que elimina la información del objeto Compania en la base Cine de MongoDB
+     * @param compania , un objeto de tipo Compania
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean borrarCompania(Compania compania){
+         boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            Document doc = createDBObjectCompania(compania);
+            MongoCollection col = dbs.getCollection("Companias");
+        
+            col.deleteOne(doc);
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo borrarCompania
+    
+    /**
+     * Metodo que leer la información del objeto pelicula en la base Cine de MongoDB
+     * @param pelicula, un objeto de tipo pelicula
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean leerPelicula(Pelicula pelicula){
+         boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            Document doc = createDBObjectPelicula(pelicula);
+            MongoCollection col = dbs.getCollection("Peliculas");
+        
+            FindIterable<Document> F = col.find();
+            
+            for (Document docs : F) {
+                System.out.print(docs.toString());
+            }
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo leerPelicula
+    
+    /**
+     * Metodo que leer la información del objeto Compania en la base Cine de MongoDB
+     * @param compania , un objeto de tipo Compania
+     * @return boolean, confirma si el proceso tuvo exito True o fallo False 
+     */    
+    public boolean leerCompania(Compania compania){
+         boolean exito = true;
+        
+        try {
+            MongoDatabase dbs = creaMongoClient();
+        
+            Document doc = createDBObjectCompania(compania);
+            MongoCollection col = dbs.getCollection("Companias");
+        
+            FindIterable<Document> F = col.find();
+            
+            for (Document docs : F) {
+                System.out.print(docs.toString());
+            }
+
+        } catch (Exception e) {
+            exito = false;
+        }
+
+        mongoClient.close();
+        return exito;
+    }//Fin del metodo leerCompania
+    
+    /**
+     * Metedo que crea un Document
      * @param Peli, un objeto de tipo Pelicula
-     * @return DBObject, un arreglo JSON con toda la información del objeto pelicula
+     * @return Document, un arreglo JSON con toda la información del objeto pelicula
      */
     private static Document createDBObjectPelicula(Pelicula Peli) {
 		Document docBuilder = new Document();
@@ -90,6 +221,25 @@ public class MongoConnection {
                 docBuilder.append("actores", Peli.getActores());
                 
 		return docBuilder;
-	}
+    }//Fin del metodo leerDBObjectPelicula
     
+    /**
+    * Metedo que crea un Document
+    * @param Comp, un objeto de tipo Compania
+    * @return Document, un arreglo JSON con toda la información del objeto Compania
+    */
+    private static Document createDBObjectCompania(Compania Comp) {
+		Document docBuilder = new Document();
+								
+		docBuilder.append("nombreCompania", Comp.getNombreCompania());
+                docBuilder.append("añoFundacion", Comp.getAnioFundacion());
+                
+                if(Comp.getPaginaOficial()!=null){
+                    docBuilder.append("paginaOficial", Comp.getPaginaOficial());
+                }
+                
+
+                
+		return docBuilder;
+    }//Fin del metodo CreateDBObjectCompania
 }//Fin de la clase MongoConnection

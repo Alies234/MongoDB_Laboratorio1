@@ -22,7 +22,7 @@ public class Pelicula {
     private List<String> Actores;
 
     /**
-     * Contructor de la clase pelicula que resive todos los parametros globales meno franquicia
+     * Contructor de la clase pelicula que resive todos los parametros globales menos franquicia
      * @param nombrePelicula El nombre de la pelicula
      * @param nombreDirector El nombre del director de  la pelicula
      * @param genero El genero al cual pertenece la pelicula
@@ -67,6 +67,7 @@ public class Pelicula {
         this.minutos = minutos;
         this.Actores = Actores;
     }//Fin del metodo pelicula 
+    
     //Aqui comienza todos los getters & setters del la clase
     public String getNombrePelicula() {
         return nombrePelicula;
