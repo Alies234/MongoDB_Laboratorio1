@@ -36,6 +36,7 @@ public class Pelicula {
         this.nombrePelicula = nombrePelicula;
         this.nombreDirector = nombreDirector;
         this.genero = genero;
+        this.franquicia = null;
         this.paisDeProduccion = paisDeProduccion;
         this.companíaProductora = companíaProductora;
         this.anio = anio;
