@@ -9,6 +9,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 
 
@@ -142,24 +144,24 @@ public class MongoConnection {
      * @param pelicula, un documento JSON con informacion de pelicula
      * @return FindIterable<Document>, la lista de los elementos encontrados
      */    
-    public FindIterable<Document> leerPelicula(Document pelicula){
-         FindIterable<Document> F = null;
+    public List<Document> leerPelicula(Document pelicula){
+        List<Document>  LD= new ArrayList<Document>();
         
         try {
             MongoDatabase dbs = creaMongoClient();
         
             MongoCollection col = dbs.getCollection("Peliculas");
         
-            F = col.find(pelicula);
+            FindIterable<Document> F = col.find(pelicula);
             
             for (Document docs : F) {
-                System.out.print(docs.toString());
+                LD.add(docs);
             }
         } catch (Exception e) {
         }
 
         mongoClient.close();
-        return F;
+        return LD;
     }//Fin del metodo leerPelicula
     
     /**
@@ -192,24 +194,24 @@ public class MongoConnection {
      * Metodo que leer la información del objeto pelicula en la base Cine de MongoDB
      * @return FindIterabl<Document>, la lista de los elementos encontrados
      */    
-    public FindIterable<Document> leerTodoPelicula(){
-         FindIterable<Document> F = null;
+    public List<Document> leerTodoPelicula(){
+        List<Document>  LD= new ArrayList<Document>();
         
         try {
             MongoDatabase dbs = creaMongoClient();
         
             MongoCollection col = dbs.getCollection("Peliculas");
         
-            F = col.find();
+            FindIterable<Document> F = col.find();
             
             for (Document docs : F) {
-                System.out.print(docs.toString());
+                LD.add(docs);
             }
         } catch (Exception e) {
         }
 
         mongoClient.close();
-        return F;
+        return LD;
     }//Fin del metodo leerTodoPelicula
     
     /**
@@ -293,7 +295,7 @@ public class MongoConnection {
      * @param Peli, un objeto de tipo Pelicula
      * @return Document, un arreglo JSON con toda la información del objeto pelicula
      */
-    private static Document createDBObjectPelicula(Pelicula Peli) {
+    private Document createDBObjectPelicula(Pelicula Peli) {
 		Document docBuilder = new Document();
 								
 		docBuilder.append("nombrePelicula", Peli.getNombrePelicula());
@@ -318,7 +320,7 @@ public class MongoConnection {
     * @param Comp, un objeto de tipo Compania
     * @return Document, un arreglo JSON con toda la información del objeto Compania
     */
-    private static Document createDBObjectCompania(Compania Comp) {
+    private Document createDBObjectCompania(Compania Comp) {
 		Document docBuilder = new Document();
 								
 		docBuilder.append("nombreCompania", Comp.getNombreCompania());

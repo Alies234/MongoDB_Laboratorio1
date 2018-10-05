@@ -5,6 +5,13 @@
  */
 package Interfaz;
 
+import Logica.MongoConnection;
+import Logica.Pelicula;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Daniel
@@ -49,6 +56,7 @@ public class cPelicula extends javax.swing.JFrame {
         jButton_guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel_nombrePelicula.setText("Nombre de la pelicula:");
 
@@ -112,7 +120,7 @@ public class cPelicula extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_companíaProductora)
                             .addComponent(jLabel_anio))
-                        .addGap(18, 18, 18)
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField_anio)
@@ -181,6 +189,7 @@ public class cPelicula extends javax.swing.JFrame {
         boolean verificar = false;
         if (mode == -1) {
 
+            cadena = cadena.replace(" ", "");
             for (int i = 0; i < cadena.length(); i++) {
 
                 if (Character.isLetter(cadena.charAt(i))) {
@@ -191,6 +200,7 @@ public class cPelicula extends javax.swing.JFrame {
             }//Fin del if
         } else if (mode == 0) {
 
+            cadena = cadena.replace(" ", "");
             for (int i = 0; i < cadena.length(); i++) {
 
                 if (Character.isLetter(cadena.charAt(i)) || Character.isDigit(cadena.charAt(i))) {
@@ -214,8 +224,51 @@ public class cPelicula extends javax.swing.JFrame {
     }//Fin del metodo VerificaString
 
     private void jButton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guardarActionPerformed
-        if ((VerificaString(jTextField_nombrePelicula.getText(), 0)) &&(VerificaString(jTextField_nombreDirector.getText(), 0))){
+        if ((VerificaString(jTextField_nombrePelicula.getText(), 0)) && (VerificaString(jTextField_nombreDirector.getText(), 0))
+                && (VerificaString(jTextField_genero.getText(), 0)) && (VerificaString(jTextField_paisProduccion.getText(), 0))
+                && (VerificaString(jTextField_companíaProductora.getText(), 0)) && (VerificaString(jTextField_anio.getText(), 1))
+                && (VerificaString(jTextField_minutos.getText(), 1))) {
 
+            boolean entre = false;
+            List<String> actores = new ArrayList<String>();
+
+            StringTokenizer tokens = new StringTokenizer(jTextArea1.getText(), ",");
+            while (tokens.hasMoreTokens()) {
+                actores.add(tokens.nextToken());
+                entre = true;
+            }
+
+            if (entre) {
+
+                if (jTextField_franquicia.getText().equals("")) {
+                    Pelicula P = new Pelicula(jTextField_nombrePelicula.getText(), jTextField_nombreDirector.getText(),
+                            jTextField_genero.getText(), jTextField_paisProduccion.getText(),
+                            jTextField_companíaProductora.getText(), Integer.parseInt(jTextField_anio.getText()),
+                            Integer.parseInt(jTextField_minutos.getText()), actores);
+
+                    MongoConnection MC = new MongoConnection();
+                    MC.guardarPelicula(P);
+                    JOptionPane.showMessageDialog(rootPane, "Se guardo la pelicula exitosamente");
+                } else {
+                    if (VerificaString(jTextField_franquicia.getText(), 0)) {
+                        Pelicula P = new Pelicula(jTextField_nombrePelicula.getText(), jTextField_nombreDirector.getText(),
+                                jTextField_genero.getText(), jTextField_paisProduccion.getText(), jTextField_franquicia.getText(),
+                                jTextField_companíaProductora.getText(), Integer.parseInt(jTextField_anio.getText()),
+                                Integer.parseInt(jTextField_minutos.getText()), actores);
+
+                        MongoConnection MC = new MongoConnection();
+                        JOptionPane.showMessageDialog(rootPane, "Se guardo la pelicula exitosamente");
+                        MC.guardarPelicula(P);
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
+            }
+
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
         }
     }//GEN-LAST:event_jButton_guardarActionPerformed
 

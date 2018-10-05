@@ -35,12 +35,27 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton_C.setText("C");
+        jButton_C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CActionPerformed(evt);
+            }
+        });
 
         jButton_D.setText("D");
+        jButton_D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_DActionPerformed(evt);
+            }
+        });
 
         jButton_Peliculas2.setText("U");
 
         jButton_R.setText("R");
+        jButton_R.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,6 +88,24 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CActionPerformed
+        cPelicula C = new cPelicula();
+        C.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_CActionPerformed
+
+    private void jButton_DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DActionPerformed
+        dPelicula D = new dPelicula();
+        D.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_DActionPerformed
+
+    private void jButton_RActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RActionPerformed
+        rPelicula R = new rPelicula();
+        R.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_RActionPerformed
 
     /**
      * @param args the command line arguments
