@@ -6,7 +6,7 @@
 package Interfaz;
 
 import Logica.MongoConnection;
-import com.mongodb.client.FindIterable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
@@ -50,12 +50,12 @@ public class rPelicula extends javax.swing.JFrame {
         jTextField_franquicia = new javax.swing.JTextField();
         jTextField_minutos = new javax.swing.JTextField();
         jLabel_companíaProductora = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel_nombrePelicula = new javax.swing.JLabel();
         jTextField_genero = new javax.swing.JTextField();
         jTextField_companíaProductora = new javax.swing.JTextField();
         jLabel_actores = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,16 +84,22 @@ public class rPelicula extends javax.swing.JFrame {
 
         jLabel_companíaProductora.setText("Compañia productora:");
 
+        jLabel_nombrePelicula.setText("Nombre de la pelicula:");
+
+        jLabel_actores.setText("Actores (separar con ,):");
+
+        jScrollPane4.setAutoscrolls(true);
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre de la pelicula", "Nombre del director", "Genero", "Pais de produccion", "Franquicia", "Companía productora", "Año", "Minutos", "Actores"
+                "Nombre Pelicula", "Nombre Director", "Genero", "País", "Franquicia", "Companía productora", "Año", "Minutos", "Actores"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -107,66 +113,70 @@ public class rPelicula extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setColumnSelectionAllowed(true);
-        jScrollPane3.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-
-        jLabel_nombrePelicula.setText("Nombre de la pelicula:");
-
-        jLabel_actores.setText("Actores (separar con ,):");
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.setAutoscrolls(false);
+        jScrollPane4.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(115);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTable2.getColumnModel().getColumn(1).setMinWidth(120);
+            jTable2.getColumnModel().getColumn(5).setMinWidth(150);
+            jTable2.getColumnModel().getColumn(8).setMinWidth(200);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_nombreDirector)
-                                    .addComponent(jLabel_genero))
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel_nombrePelicula)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField_nombrePelicula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                            .addComponent(jTextField_nombreDirector, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_genero)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel_actores)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel_paisProduccion)
-                            .addGap(30, 30, 30)
-                            .addComponent(jTextField_paisProduccion))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel_companíaProductora)
-                                .addComponent(jLabel_anio)
-                                .addComponent(jLabel_franquicia))
-                            .addGap(16, 16, 16)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField_franquicia)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField_anio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel_minutos)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextField_companíaProductora)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(jButton_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 658, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel_nombreDirector)
+                                            .addComponent(jLabel_genero))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel_nombrePelicula)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextField_nombrePelicula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(jTextField_nombreDirector, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_genero)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel_actores)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel_paisProduccion)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(jTextField_paisProduccion))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel_companíaProductora)
+                                        .addComponent(jLabel_anio)
+                                        .addComponent(jLabel_franquicia))
+                                    .addGap(16, 16, 16)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField_franquicia)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jTextField_anio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel_minutos)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextField_companíaProductora)))))
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(jButton_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +218,7 @@ public class rPelicula extends javax.swing.JFrame {
                             .addComponent(jLabel_actores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Filtrar)
                 .addContainerGap())
@@ -221,64 +231,85 @@ public class rPelicula extends javax.swing.JFrame {
         Document doc = createDBObjectPelicula();
         MongoConnection MC = new MongoConnection();
         List<Document> F = null;
-        if(doc==null){
+        if (doc == null) {
             F = MC.leerTodoPelicula();
-        }else{
+        } else {
             F = MC.leerPelicula(doc);
         }
-        
-        
+
         DefaultTableModel dfm = (DefaultTableModel) jTable2.getModel();
-        for(Document docs: F){
-            dfm.addRow(new Object[] {docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"), 
-            docs.getString("paisDeProduccion"), docs.getString("franquicia"),docs.getString("companíaProductora"),
-            docs.getInteger("año"), docs.getInteger("minutos"),docs.get("actores").toString()});
+        int filas = dfm.getRowCount();
+        for (int i = 1; i <= filas; i++) {
+            dfm.removeRow(0);
+        }
+        for (Document docs : F) {
+            dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
+                docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
+                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
         }
     }//GEN-LAST:event_jButton_FiltrarActionPerformed
 
-     private Document createDBObjectPelicula() {
+    private Document createDBObjectPelicula() {
         Document docBuilder = new Document();
         boolean entre = false;
-	if (jTextField_nombrePelicula.getText().equals("")==false) {
+        if (jTextField_nombrePelicula.getText().equals("") == false) {
             docBuilder.append("nombrePelicula", jTextField_nombrePelicula.getText());
-            entre= true;
-        }if(jTextField_nombreDirector.getText().equals("")==false){
-            docBuilder.append("nombreDirector", jTextField_nombreDirector.getText());
-            entre= true;
-        }if(jTextField_genero.getText().equals("")==false){
-            docBuilder.append("genero", jTextField_genero.getText());
-            entre= true;
-        }if(jTextField_paisProduccion.getText().equals("")==false){
-            docBuilder.append("paisDeProduccion", jTextField_paisProduccion.getText());
-            entre= true;
-        }if(jTextField_franquicia.getText().equals("")==false){
-            docBuilder.append("franquicia", jTextField_franquicia.getText());
-            entre= true;
-        }if(jTextField_companíaProductora.getText().equals("")==false){
-            docBuilder.append("companíaProductora", jTextField_companíaProductora.getText());
-            entre= true;
-        }if(jTextField_anio.getText().equals("")==false){
-            docBuilder.append("año", jTextField_anio.getText());
-            entre= true;
-        }if(jTextField_minutos.getText().equals("")==false){
-            docBuilder.append("minutos", jTextField_minutos.getText());
-            entre= true;
-        }if(jTextArea1.getText().equals("")==false){
-            
-            StringTokenizer tokens = new StringTokenizer(jTextArea1.getText(), ",");
-            
-            while (tokens.hasMoreTokens()) {
-                docBuilder.append("actores", tokens.nextToken());
-            }
             entre = true;
         }
+        if (jTextField_nombreDirector.getText().equals("") == false) {
+            docBuilder.append("nombreDirector", jTextField_nombreDirector.getText());
+            entre = true;
+        }
+        if (jTextField_genero.getText().equals("") == false) {
+            docBuilder.append("genero", jTextField_genero.getText());
+            entre = true;
+        }
+        if (jTextField_paisProduccion.getText().equals("") == false) {
+            docBuilder.append("paisDeProduccion", jTextField_paisProduccion.getText());
+            entre = true;
+        }
+        if (jTextField_franquicia.getText().equals("") == false) {
+            docBuilder.append("franquicia", jTextField_franquicia.getText());
+            entre = true;
+        }
+        if (jTextField_companíaProductora.getText().equals("") == false) {
+            docBuilder.append("companíaProductora", jTextField_companíaProductora.getText());
+            entre = true;
+        }
+        if (jTextField_anio.getText().equals("") == false) {
+            docBuilder.append("año", Integer.parseInt(jTextField_anio.getText()));
+            entre = true;
+        }
+        if (jTextField_minutos.getText().equals("") == false) {
+            docBuilder.append("minutos", Integer.parseInt(jTextField_minutos.getText()));
+            entre = true;
+        }
+        if (jTextArea1.getText().equals("") == false) {
+
+           String actores = jTextArea1.getText();
+            jTextArea1.setText(actores);
+            StringTokenizer tokens = new StringTokenizer(actores, ",");
+
+            List<String> LS = new ArrayList<String>();
+
+            while (tokens.hasMoreTokens()) {
+                LS.add(tokens.nextToken());
+            }
+
+            Document DocActores = new Document();
+
+            DocActores.append("$all", LS);
+            docBuilder.append("actores", DocActores);
+            entre= true;
         
-        if(entre){
+        }
+        if (entre) {
             return docBuilder;
         }
-           return null;    
-                  
+        return null;
+
     }//Fin del metodo leerDBObjectPelicula
+
     /**
      * @param args the command line arguments
      */
@@ -326,7 +357,7 @@ public class rPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_nombrePelicula;
     private javax.swing.JLabel jLabel_paisProduccion;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField_anio;

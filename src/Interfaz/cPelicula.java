@@ -193,10 +193,12 @@ public class cPelicula extends javax.swing.JFrame {
             for (int i = 0; i < cadena.length(); i++) {
 
                 if (Character.isLetter(cadena.charAt(i))) {
-
                     verificar = true;
 
                 }//Fin del for
+                else {
+                    return false;
+                }
             }//Fin del if
         } else if (mode == 0) {
 
@@ -204,10 +206,12 @@ public class cPelicula extends javax.swing.JFrame {
             for (int i = 0; i < cadena.length(); i++) {
 
                 if (Character.isLetter(cadena.charAt(i)) || Character.isDigit(cadena.charAt(i))) {
-
                     verificar = true;
 
                 }//Fin del for
+                else {
+                    return false;
+                }
             }//Fin del if
         } else {
 
@@ -218,6 +222,9 @@ public class cPelicula extends javax.swing.JFrame {
                     verificar = true;
 
                 }//Fin del for
+                else {
+                    return false;
+                }
             }//Fin del if
         }
         return verificar;
@@ -229,16 +236,28 @@ public class cPelicula extends javax.swing.JFrame {
                 && (VerificaString(jTextField_companíaProductora.getText(), 0)) && (VerificaString(jTextField_anio.getText(), 1))
                 && (VerificaString(jTextField_minutos.getText(), 1))) {
 
-            boolean entre = false;
+            int entre = 1;
             List<String> actores = new ArrayList<String>();
 
             StringTokenizer tokens = new StringTokenizer(jTextArea1.getText(), ",");
-            while (tokens.hasMoreTokens()) {
-                actores.add(tokens.nextToken());
-                entre = true;
-            }
 
-            if (entre) {
+            while (tokens.hasMoreTokens()) {
+                String revisaAutor = tokens.nextToken().replaceAll("\n", "");
+                if (entre != -1) {
+
+                    System.out.print(revisaAutor);
+
+                    if (VerificaString(revisaAutor, -1)) {
+                        actores.add(revisaAutor);
+                        entre = 0;
+                    } else {
+                        entre = -1;
+                    }
+                    System.out.print(entre + "");
+                }
+
+            }
+            if (entre == 0) {
 
                 if (jTextField_franquicia.getText().equals("")) {
                     Pelicula P = new Pelicula(jTextField_nombrePelicula.getText(), jTextField_nombreDirector.getText(),
@@ -259,15 +278,15 @@ public class cPelicula extends javax.swing.JFrame {
                         MongoConnection MC = new MongoConnection();
                         JOptionPane.showMessageDialog(rootPane, "Se guardo la pelicula exitosamente");
                         MC.guardarPelicula(P);
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
                     }
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
             }
 
-        } else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
         }
     }//GEN-LAST:event_jButton_guardarActionPerformed

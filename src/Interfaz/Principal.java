@@ -43,8 +43,18 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton_Compania.setText("Compañia");
+        jButton_Compania.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CompaniaActionPerformed(evt);
+            }
+        });
 
         jButton_Consulta.setText("Consultas");
+        jButton_Consulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ConsultaActionPerformed(evt);
+            }
+        });
 
         jButton_Info.setText("Info");
         jButton_Info.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +104,18 @@ public class Principal extends javax.swing.JFrame {
         PI.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_PeliculasActionPerformed
+
+    private void jButton_CompaniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CompaniaActionPerformed
+        CompaniaInterfaz CI = new CompaniaInterfaz();
+        CI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_CompaniaActionPerformed
+
+    private void jButton_ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultaActionPerformed
+        Consultas C = new Consultas();
+        C.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_ConsultaActionPerformed
 
     /**
      * @param args the command line arguments

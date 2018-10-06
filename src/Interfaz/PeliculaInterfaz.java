@@ -49,6 +49,11 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         });
 
         jButton_Peliculas2.setText("U");
+        jButton_Peliculas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Peliculas2ActionPerformed(evt);
+            }
+        });
 
         jButton_R.setText("R");
         jButton_R.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +111,12 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         R.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_RActionPerformed
+
+    private void jButton_Peliculas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Peliculas2ActionPerformed
+        uPelicula U = new uPelicula();
+        U.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_Peliculas2ActionPerformed
 
     /**
      * @param args the command line arguments

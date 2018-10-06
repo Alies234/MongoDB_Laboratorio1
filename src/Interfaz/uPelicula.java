@@ -6,7 +6,12 @@
 package Interfaz;
 
 import Logica.MongoConnection;
+import Logica.Pelicula;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
 /**
@@ -31,8 +36,6 @@ public class uPelicula extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel_minutos = new javax.swing.JLabel();
         jButton_Actualizar = new javax.swing.JButton();
         jLabel_genero = new javax.swing.JLabel();
@@ -54,38 +57,15 @@ public class uPelicula extends javax.swing.JFrame {
         jTextField_paisProduccion = new javax.swing.JTextField();
         jTextField_nombreDirector = new javax.swing.JTextField();
         jLabel_franquicia = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton_Filtrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre de la pelicula", "Nombre del director", "Genero", "Pais de produccion", "Franquicia", "Companía productora", "Año", "Minutos", "Actores"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable2.setColumnSelectionAllowed(true);
-        jScrollPane3.setViewportView(jTable2);
-
         jLabel_minutos.setText("Minutos que dura:");
 
-        jButton_Actualizar.setText("Filtrar");
+        jButton_Actualizar.setText("Actualizar");
         jButton_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ActualizarActionPerformed(evt);
@@ -99,6 +79,11 @@ public class uPelicula extends javax.swing.JFrame {
         jLabel_nombrePelicula.setText("Nombre de la pelicula:");
 
         jButton_Seleccionar.setText("Seleccionar");
+        jButton_Seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SeleccionarActionPerformed(evt);
+            }
+        });
 
         jLabel_actores.setText("Actores (separar con ,):");
 
@@ -113,6 +98,42 @@ public class uPelicula extends javax.swing.JFrame {
         jLabel_nombreDirector.setText("Nombre del director:");
 
         jLabel_franquicia.setText("Franquicia (opcional):");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre pelicula", "Nombre director", "Genero", "Pais", "Franquicia", "Compañia productora", "Año", "Minutos", "Actores"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.setAutoscrolls(false);
+        jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(1).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(2).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(3).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(4).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(5).setMinWidth(125);
+            jTable2.getColumnModel().getColumn(8).setMinWidth(1000);
+        }
+
+        jButton_Filtrar.setText("Filtrar");
+        jButton_Filtrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_FiltrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,10 +157,6 @@ public class uPelicula extends javax.swing.JFrame {
                             .addComponent(jTextField_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel_actores)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel_paisProduccion)
                             .addGap(30, 30, 30)
                             .addComponent(jTextField_paisProduccion))
@@ -159,15 +176,25 @@ public class uPelicula extends javax.swing.JFrame {
                                     .addComponent(jLabel_minutos)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextField_companíaProductora, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jButton_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_Seleccionar)
-                .addGap(208, 208, 208))
+                                .addComponent(jTextField_companíaProductora, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel_actores)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Seleccionar)
+                        .addGap(213, 213, 213))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,71 +234,311 @@ public class uPelicula extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_actores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Actualizar)
-                    .addComponent(jButton_Seleccionar))
-                .addContainerGap())
+                    .addComponent(jButton_Seleccionar)
+                    .addComponent(jButton_Filtrar))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean VerificaString(String cadena, int mode) {
+
+        boolean verificar = false;
+        if (mode == -1) {
+
+            cadena = cadena.replace(" ", "");
+            for (int i = 0; i < cadena.length(); i++) {
+
+                if (Character.isLetter(cadena.charAt(i))) {
+                    verificar = true;
+                }//Fin del for
+                else {
+                    return false;
+                }
+            }//Fin del if
+        } else if (mode == 0) {
+
+            cadena = cadena.replace(" ", "");
+            for (int i = 0; i < cadena.length(); i++) {
+
+                if (Character.isLetter(cadena.charAt(i)) || Character.isDigit(cadena.charAt(i))) {
+
+                    verificar = true;
+
+                }//Fin del for
+                else {
+                    return false;
+                }
+            }//Fin del if
+        } else {
+
+            for (int i = 0; i < cadena.length(); i++) {
+
+                if (Character.isDigit(cadena.charAt(i))) {
+
+                    verificar = true;
+
+                }//Fin del for
+                else {
+                    return false;
+                }
+            }//Fin del if
+        }
+        return verificar;
+    }//Fin del metodo VerificaString    
+
     private void jButton_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarActionPerformed
-        Document doc = createDBObjectPelicula();
-        MongoConnection MC = new MongoConnection();
-        if(doc==null){
-            MC.leerTodoPelicula();
-        }else{
-            MC.leerPelicula(doc);
+
+        if (Permitir) {
+            if ((VerificaString(jTextField_nombrePelicula.getText(), 0)) && (VerificaString(jTextField_nombreDirector.getText(), 0))
+                    && (VerificaString(jTextField_genero.getText(), 0)) && (VerificaString(jTextField_paisProduccion.getText(), 0))
+                    && (VerificaString(jTextField_companíaProductora.getText(), 0)) && (VerificaString(jTextField_anio.getText(), 1))
+                    && (VerificaString(jTextField_minutos.getText(), 1))) {
+
+                int entre = 1;
+                List<String> actores = new ArrayList<String>();
+
+                StringTokenizer tokens = new StringTokenizer(jTextArea1.getText(), ",");
+
+                while (tokens.hasMoreTokens()) {
+                    String revisaAutor = tokens.nextToken().replaceAll("\n", "");
+                    if (entre != -1) {
+
+                        System.out.print(revisaAutor);
+
+                        if (VerificaString(revisaAutor, -1)) {
+                            actores.add(revisaAutor);
+                            entre = 0;
+                        } else {
+                            entre = -1;
+                        }
+                        System.out.print(entre + "");
+                    }
+                }
+                if (entre == 0) {
+
+                    if (jTextField_franquicia.getText().equals("")) {
+                        Pelicula P = new Pelicula(jTextField_nombrePelicula.getText(), jTextField_nombreDirector.getText(),
+                                jTextField_genero.getText(), jTextField_paisProduccion.getText(),
+                                jTextField_companíaProductora.getText(), Integer.parseInt(jTextField_anio.getText()),
+                                Integer.parseInt(jTextField_minutos.getText()), actores);
+
+                        MongoConnection MC = new MongoConnection();
+                        MC.actualizarPelicula(P, Querry);
+                        JOptionPane.showMessageDialog(rootPane, "Se actualizo los datos");
+                        refrescar();
+                    } else {
+                        if (VerificaString(jTextField_franquicia.getText(), 0)) {
+                            Pelicula P = new Pelicula(jTextField_nombrePelicula.getText(), jTextField_nombreDirector.getText(),
+                                    jTextField_genero.getText(), jTextField_paisProduccion.getText(), jTextField_franquicia.getText(),
+                                    jTextField_companíaProductora.getText(), Integer.parseInt(jTextField_anio.getText()),
+                                    Integer.parseInt(jTextField_minutos.getText()), actores);
+
+                            MongoConnection MC = new MongoConnection();
+                            MC.actualizarPelicula(P, Querry);
+                            JOptionPane.showMessageDialog(rootPane, "Se actualizo los datos");
+                            refrescar();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Error revise los datos ingresados");
+            }
         }
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
 
-     private Document createDBObjectPelicula() {
+    private void jButton_SeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SeleccionarActionPerformed
+        int row = jTable2.getSelectedRow();
+
+        if (row != -1) {
+
+            if (jTable2.getValueAt(row, 4) == null) {
+
+                this.Querry = createDBObjectPelicula((String) jTable2.getValueAt(row, 0), (String) jTable2.getValueAt(row, 1),
+                        (String) jTable2.getValueAt(row, 2), (String) jTable2.getValueAt(row, 3),
+                        "", (String) jTable2.getValueAt(row, 5), (int) jTable2.getValueAt(row, 6), (int) jTable2.getValueAt(row, 7),
+                        (String) jTable2.getValueAt(row, 8));
+
+            } else {
+                this.Querry = createDBObjectPelicula((String) jTable2.getValueAt(row, 0), (String) jTable2.getValueAt(row, 1),
+                        (String) jTable2.getValueAt(row, 2), (String) jTable2.getValueAt(row, 3),
+                        (String) jTable2.getValueAt(row, 4), (String) jTable2.getValueAt(row, 5), (int) jTable2.getValueAt(row, 6),
+                        (int) jTable2.getValueAt(row, 7), (String) jTable2.getValueAt(row, 8));
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Error: Selecione una fila");
+        }
+    }//GEN-LAST:event_jButton_SeleccionarActionPerformed
+
+    private void jButton_FiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FiltrarActionPerformed
+        Document doc = createDBObjectPelicula();
+        MongoConnection MC = new MongoConnection();
+        List<Document> F = null;
+        if (doc == null) {
+            F = MC.leerTodoPelicula();
+        } else {
+            F = MC.leerPelicula(doc);
+        }
+
+        DefaultTableModel dfm = (DefaultTableModel) jTable2.getModel();
+
+        int filas = dfm.getRowCount();
+        for (int i = 1; i <= filas; i++) {
+            dfm.removeRow(0);
+        }
+
+        for (Document docs : F) {
+            dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
+                docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
+                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+        }
+    }//GEN-LAST:event_jButton_FiltrarActionPerformed
+
+    private void refrescar() {
+        MongoConnection MC = new MongoConnection();
+        List<Document> F = null;
+
+        F = MC.leerTodoPelicula();
+
+        DefaultTableModel dfm = (DefaultTableModel) jTable2.getModel();
+
+        int filas = dfm.getRowCount();
+        for (int i = 1; i <= filas; i++) {
+            dfm.removeRow(0);
+        }
+
+        for (Document docs : F) {
+            dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
+                docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
+                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+        }
+
+        Permitir = false;
+    }
+
+    private Document createDBObjectPelicula() {
         Document docBuilder = new Document();
         boolean entre = false;
-	if (jTextField_nombrePelicula.getText().equals("")==false) {
+        if (jTextField_nombrePelicula.getText().equals("") == false) {
             docBuilder.append("nombrePelicula", jTextField_nombrePelicula.getText());
-            entre= true;
-        }if(jTextField_nombreDirector.getText().equals("")==false){
-            docBuilder.append("nombreDirector", jTextField_nombreDirector.getText());
-            entre= true;
-        }if(jTextField_genero.getText().equals("")==false){
-            docBuilder.append("genero", jTextField_genero.getText());
-            entre= true;
-        }if(jTextField_paisProduccion.getText().equals("")==false){
-            docBuilder.append("paisDeProduccion", jTextField_paisProduccion.getText());
-            entre= true;
-        }if(jTextField_franquicia.getText().equals("")==false){
-            docBuilder.append("franquicia", jTextField_franquicia.getText());
-            entre= true;
-        }if(jTextField_companíaProductora.getText().equals("")==false){
-            docBuilder.append("companíaProductora", jTextField_companíaProductora.getText());
-            entre= true;
-        }if(jTextField_anio.getText().equals("")==false){
-            docBuilder.append("año", jTextField_anio.getText());
-            entre= true;
-        }if(jTextField_minutos.getText().equals("")==false){
-            docBuilder.append("minutos", jTextField_minutos.getText());
-            entre= true;
-        }if(jTextArea1.getText().equals("")==false){
-            
-            StringTokenizer tokens = new StringTokenizer(jTextArea1.getText(), ",");
-            
-            while (tokens.hasMoreTokens()) {
-                docBuilder.append("actores", tokens.nextToken());
-            }
             entre = true;
         }
-        
-        if(entre){
+        if (jTextField_nombreDirector.getText().equals("") == false) {
+            docBuilder.append("nombreDirector", jTextField_nombreDirector.getText());
+            entre = true;
+        }
+        if (jTextField_genero.getText().equals("") == false) {
+            docBuilder.append("genero", jTextField_genero.getText());
+            entre = true;
+        }
+        if (jTextField_paisProduccion.getText().equals("") == false) {
+            docBuilder.append("paisDeProduccion", jTextField_paisProduccion.getText());
+            entre = true;
+        }
+        if (jTextField_franquicia.getText().equals("") == false) {
+            docBuilder.append("franquicia", jTextField_franquicia.getText());
+            entre = true;
+        }
+        if (jTextField_companíaProductora.getText().equals("") == false) {
+            docBuilder.append("companíaProductora", jTextField_companíaProductora.getText());
+            entre = true;
+        }
+        if (jTextField_anio.getText().equals("") == false) {
+            docBuilder.append("año", Integer.parseInt(jTextField_anio.getText()));
+            entre = true;
+        }
+        if (jTextField_minutos.getText().equals("") == false) {
+            docBuilder.append("minutos", Integer.parseInt(jTextField_minutos.getText()));
+            entre = true;
+        }
+        if (jTextArea1.getText().equals("") == false) {
+
+            String actores = jTextArea1.getText();
+            jTextArea1.setText(actores);
+            StringTokenizer tokens = new StringTokenizer(actores, ",");
+
+            List<String> LS = new ArrayList<String>();
+
+            while (tokens.hasMoreTokens()) {
+                LS.add(tokens.nextToken());
+            }
+
+            Document DocActores = new Document();
+
+            DocActores.append("$all", LS);
+            docBuilder.append("actores", DocActores);
+        }
+
+        if (entre) {
             return docBuilder;
         }
-           return null;    
-     }
+        return null;
+    }
+
+    private Document createDBObjectPelicula(String nombrePelicua, String nombreDirector,
+            String genero, String pais, String franquicia, String compania, int anio,
+            int minutos, String actores) {
+        Document docBuilder = new Document();
+
+        docBuilder.append("nombrePelicula", nombrePelicua);
+        jTextField_nombrePelicula.setText(nombrePelicua);
+
+        docBuilder.append("nombreDirector", nombreDirector);
+        jTextField_nombreDirector.setText(nombreDirector);
+
+        docBuilder.append("genero", genero);
+        jTextField_genero.setText(genero);
+
+        docBuilder.append("paisDeProduccion", pais);
+        jTextField_paisProduccion.setText(pais);
+
+        if (franquicia.equals("") == false) {
+            docBuilder.append("franquicia", franquicia);
+        }
+        jTextField_franquicia.setText(franquicia);
+
+        docBuilder.append("companíaProductora", compania);
+        jTextField_companíaProductora.setText(compania);
+
+        docBuilder.append("año", anio);
+        jTextField_anio.setText(anio + "");
+
+        docBuilder.append("minutos", minutos);
+        jTextField_minutos.setText(minutos + "");
+
+        actores = actores.substring(1, actores.length() - 1);
+        actores = actores.replaceAll(", ", ",");
+        jTextArea1.setText(actores);
+        StringTokenizer tokens = new StringTokenizer(actores, ",");
+
+        List<String> LS = new ArrayList<String>();
+
+        while (tokens.hasMoreTokens()) {
+            LS.add(tokens.nextToken());
+        }
+
+        Document DocActores = new Document();
+
+        DocActores.append("$all", LS);
+        docBuilder.append("actores", DocActores);
+
+        this.Permitir = true;
+        return docBuilder;
+
+    }//Fin del metodo leerDBObjectPelicula
+
     /**
      * @param args the command line arguments
      */
@@ -307,8 +574,11 @@ public class uPelicula extends javax.swing.JFrame {
         });
     }
 
+    private Document Querry;
+    private boolean Permitir = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Actualizar;
+    private javax.swing.JButton jButton_Filtrar;
     private javax.swing.JButton jButton_Seleccionar;
     private javax.swing.JLabel jLabel_actores;
     private javax.swing.JLabel jLabel_anio;

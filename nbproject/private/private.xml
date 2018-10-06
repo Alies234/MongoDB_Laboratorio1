@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/dPelicula.java</file>
             <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Logica/MongoConnection.java</file>
-            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/rPelicula.java</file>
-            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/cPelicula.java</file>
             <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/uPelicula.java</file>
             <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/PeliculaInterfaz.java</file>
-            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Logica/Pelicula.java</file>
+            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/CompaniaInterfaz.java</file>
+            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/Consultas.java</file>
+            <file>file:/C:/Users/Daniel/Documents/MongoDB_Laboratorio1/src/Interfaz/Principal.java</file>
         </group>
     </open-files>
 </project-private>
