@@ -5,9 +5,11 @@ package Logica;
 
 //imports necesario para conectar la aplicacion con Mongo
 import com.mongodb.MongoClient;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Projections;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -213,7 +215,6 @@ public class MongoConnection {
             MongoCollection col = dbs.getCollection("Peliculas");
 
             FindIterable<Document> F = col.find();
-
             for (Document docs : F) {
                 LD.add(docs);
             }
@@ -224,6 +225,55 @@ public class MongoConnection {
         return LD;
     }//Fin del metodo leerTodoPelicula
 
+        /**
+     * Metodo que leer la información del objeto pelicula en la base Cine de
+     * MongoDB, tambien filtra el resultado
+     * @param Filtro, un querry con el filtro que se va a aplicar a la consulta 
+     * @param Mostrar, un Document donde viene especificados los parametros por mostrar
+     * 1 se muestra 0 no
+     * @return Lisr<Document>, la lista de los elementos encontrados
+     */
+    public List<Document> consultaD(Document Filtro) {
+        List<Document> LD = new ArrayList<Document>();
+
+        try {
+            MongoDatabase dbs = creaMongoClient();
+
+            MongoCollection col = dbs.getCollection("Peliculas");
+
+            FindIterable<Document> F = col.find(Filtro).projection(Projections.include("nombrePelicula",
+                    "genero","año"));
+            for (Document docs : F) {
+                LD.add(docs);
+            }
+        } catch (Exception e) {
+        }
+
+        mongoClient.close();
+        return LD;
+    }//Fin del metodo consultaD
+    
+    public Document consultaE(List<Document> Filtro) {
+        Document LD = new Document();
+
+        try {
+            MongoDatabase dbs = creaMongoClient();
+
+            MongoCollection col = dbs.getCollection("Peliculas");
+
+            AggregateIterable<Document> F = col.aggregate(Filtro);
+            
+            LD = F.first();
+            
+            System.out.println(LD.toJson());
+            
+        } catch (Exception e) {
+        }
+
+        mongoClient.close();
+        return LD;
+    }//Fin del metodo consultaD
+    
     /**
      * Metodo que leer la información del objeto Compania en la base Cine de
      * MongoDB

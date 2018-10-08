@@ -56,6 +56,7 @@ public class rPelicula extends javax.swing.JFrame {
         jLabel_actores = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton_Back1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,14 +125,21 @@ public class rPelicula extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(8).setMinWidth(200);
         }
 
+        jButton_Back1.setText("...");
+        jButton_Back1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Back1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +182,8 @@ public class rPelicula extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
+                        .addComponent(jButton_Back1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189)
                         .addComponent(jButton_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -220,7 +229,9 @@ public class rPelicula extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_Filtrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_Filtrar)
+                    .addComponent(jButton_Back1))
                 .addContainerGap())
         );
 
@@ -248,6 +259,12 @@ public class rPelicula extends javax.swing.JFrame {
                 docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
         }
     }//GEN-LAST:event_jButton_FiltrarActionPerformed
+
+    private void jButton_Back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Back1ActionPerformed
+        PeliculaInterfaz PI = new PeliculaInterfaz();
+        PI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_Back1ActionPerformed
 
     private Document createDBObjectPelicula() {
         Document docBuilder = new Document();
@@ -346,6 +363,8 @@ public class rPelicula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
+    private javax.swing.JButton jButton_Back1;
     private javax.swing.JButton jButton_Filtrar;
     private javax.swing.JLabel jLabel_actores;
     private javax.swing.JLabel jLabel_anio;

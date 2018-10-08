@@ -54,6 +54,7 @@ public class cPelicula extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton_guardar = new javax.swing.JButton();
+        jButton_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,6 +88,13 @@ public class cPelicula extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back.setText("...");
+        jButton_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,47 +106,50 @@ public class cPelicula extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_nombreDirector)
-                                    .addComponent(jLabel_genero))
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel_nombrePelicula)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_genero)
-                            .addComponent(jTextField_nombrePelicula)
-                            .addComponent(jTextField_nombreDirector, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_paisProduccion)
-                        .addGap(30, 30, 30)
-                        .addComponent(jTextField_paisProduccion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_franquicia)
-                        .addGap(20, 20, 20)
-                        .addComponent(jTextField_franquicia))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_companíaProductora)
-                            .addComponent(jLabel_anio))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel_nombreDirector)
+                                            .addComponent(jLabel_genero))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel_nombrePelicula)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_genero)
+                                    .addComponent(jTextField_nombrePelicula)
+                                    .addComponent(jTextField_nombreDirector, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField_anio)
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel_minutos)
+                                .addComponent(jLabel_paisProduccion)
+                                .addGap(30, 30, 30)
+                                .addComponent(jTextField_paisProduccion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_franquicia)
+                                .addGap(20, 20, 20)
+                                .addComponent(jTextField_franquicia))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_companíaProductora)
+                                    .addComponent(jLabel_anio))
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField_anio)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel_minutos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField_companíaProductora)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_actores)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField_companíaProductora)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_actores)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)
-                        .addGap(6, 6, 6)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141))
+                                .addComponent(jScrollPane1)
+                                .addGap(6, 6, 6)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +188,15 @@ public class cPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_actores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_guardar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_guardar)
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Back)
+                        .addContainerGap())))
         );
 
         pack();
@@ -245,7 +262,7 @@ public class cPelicula extends javax.swing.JFrame {
                 String revisaAutor = tokens.nextToken().replaceAll("\n", "");
                 if (entre != -1) {
 
-                    System.out.print(revisaAutor);
+                    System.out.println(revisaAutor);
 
                     if (VerificaString(revisaAutor, -1)) {
                         actores.add(revisaAutor);
@@ -291,6 +308,12 @@ public class cPelicula extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_guardarActionPerformed
 
+    private void jButton_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BackActionPerformed
+        PeliculaInterfaz PI = new PeliculaInterfaz();
+        PI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_BackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -327,6 +350,7 @@ public class cPelicula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
     private javax.swing.JButton jButton_guardar;
     private javax.swing.JLabel jLabel_actores;
     private javax.swing.JLabel jLabel_anio;

@@ -61,6 +61,7 @@ public class dPelicula extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton_Borrar = new javax.swing.JButton();
+        jButton_Back = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,6 +156,13 @@ public class dPelicula extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back.setText("...");
+        jButton_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,7 +216,8 @@ public class dPelicula extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addComponent(jButton_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
                         .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_Borrar)
@@ -257,7 +266,9 @@ public class dPelicula extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Borrar)
-                    .addComponent(jButton_Buscar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_Buscar)
+                        .addComponent(jButton_Back)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -282,9 +293,14 @@ public class dPelicula extends javax.swing.JFrame {
         }
 
         for (Document docs : F) {
+            String actores = "";
+            
+            if(docs.containsKey("actores")){
+                actores = docs.get("actores").toString();
+            }
             dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
                 docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
-                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+                docs.getInteger("año"), docs.getInteger("minutos"), actores});
         }
     }//GEN-LAST:event_jButton_BuscarActionPerformed
 
@@ -302,9 +318,14 @@ public class dPelicula extends javax.swing.JFrame {
         }
 
         for (Document docs : F) {
+            String actores = "";
+            
+            if(docs.containsKey("actores")){
+                actores = docs.get("actores").toString();
+            }
             dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
                 docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
-                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+                docs.getInteger("año"), docs.getInteger("minutos"), actores});
         }
     }
 
@@ -338,6 +359,12 @@ public class dPelicula extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton_BorrarActionPerformed
+
+    private void jButton_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BackActionPerformed
+        PeliculaInterfaz PI = new PeliculaInterfaz();
+        PI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_BackActionPerformed
 
     private Document createDBObjectPelicula() {
         Document docBuilder = new Document();
@@ -474,6 +501,7 @@ public class dPelicula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
     private javax.swing.JButton jButton_Borrar;
     private javax.swing.JButton jButton_Buscar;
     private javax.swing.JLabel jLabel_actores;

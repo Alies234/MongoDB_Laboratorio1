@@ -42,6 +42,7 @@ public class cCompania extends javax.swing.JFrame {
         jTextField_anio = new javax.swing.JTextField();
         jTextField_paginaWeb = new javax.swing.JTextField();
         jButton_guardar1 = new javax.swing.JButton();
+        jButton_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class cCompania extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back.setText("...");
+        jButton_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,7 +75,8 @@ public class cCompania extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_nombrePelicula)
                     .addComponent(jLabel_genero)
-                    .addComponent(jLabel_nombreDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_nombreDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -94,8 +103,10 @@ public class cCompania extends javax.swing.JFrame {
                     .addComponent(jTextField_paginaWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_genero))
                 .addGap(18, 18, 18)
-                .addComponent(jButton_guardar1)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_guardar1)
+                    .addComponent(jButton_Back))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,6 +181,12 @@ public class cCompania extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_guardar1ActionPerformed
 
+    private void jButton_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BackActionPerformed
+        CompaniaInterfaz CI = new CompaniaInterfaz();
+        CI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_BackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,6 +231,9 @@ public class cCompania extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
+    private javax.swing.JButton jButton_Back2;
+    private javax.swing.JButton jButton_Back3;
     private javax.swing.JButton jButton_guardar1;
     private javax.swing.JLabel jLabel_genero;
     private javax.swing.JLabel jLabel_nombreDirector;

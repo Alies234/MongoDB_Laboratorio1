@@ -47,6 +47,7 @@ public class Consultas extends javax.swing.JFrame {
         jLabel_anio = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton_consultar = new javax.swing.JButton();
+        jButton_Back2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,42 +114,52 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back2.setText("...");
+        jButton_Back2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Back2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_companíaProductora)
-                            .addComponent(jLabel_anio))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField_anio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel_minutos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField_minutos))
-                            .addComponent(jTextField_companíaProductora)))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_franquicia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField_franquicia, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_nombrePelicula)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField_nombrePelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(376, 376, 376)
-                .addComponent(jButton_consultar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_companíaProductora)
+                                    .addComponent(jLabel_anio))
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField_anio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel_minutos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField_minutos))
+                                    .addComponent(jTextField_companíaProductora)))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_franquicia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField_franquicia, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_nombrePelicula)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField_nombrePelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_Back2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(342, 342, 342)
+                        .addComponent(jButton_consultar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,9 +190,15 @@ public class Consultas extends javax.swing.JFrame {
                             .addComponent(jTextField_anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_minutos)
                             .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jButton_consultar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_consultar)
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Back2)
+                        .addContainerGap())))
         );
 
         pack();
@@ -213,6 +230,14 @@ public class Consultas extends javax.swing.JFrame {
             jTextField_minutos.setEditable(true);
 
         }else if (jComboBox1.getSelectedItem().toString().equals("Consulta D")) {
+
+            jTextField_nombrePelicula.setEditable(false);
+            jTextField_franquicia.setEditable(false);
+            jTextField_companíaProductora.setEditable(true);
+            jTextField_anio.setEditable(false);
+            jTextField_minutos.setEditable(false);
+
+        }else if (jComboBox1.getSelectedItem().toString().equals("Consulta E")) {
 
             jTextField_nombrePelicula.setEditable(false);
             jTextField_franquicia.setEditable(false);
@@ -252,21 +277,108 @@ public class Consultas extends javax.swing.JFrame {
             jTextField_minutos.setText("");
             jTextField_anio.setText("");
 
-        } 
+        } else if (jComboBox1.getSelectedItem().toString().equals("Consulta D")) {
 
+
+            d.append("companíaProductora", jTextField_companíaProductora.getText());
+            
+            resultado = MC.consultaD(d);
+            jTextField_companíaProductora.setText("");
+
+        } else if (jComboBox1.getSelectedItem().toString().equals("Consulta E")) {
+            
+            List<Document> listaggregate = new ArrayList<>();
+            
+            Document Filtro = new Document();
+            Filtro.append("companíaProductora",jTextField_companíaProductora.getText());
+            
+            Document Match = new Document();
+            Match.append("$match",Filtro);
+            
+            listaggregate.add(Match);
+            
+            Document NumeroPeliculas = new Document();
+            NumeroPeliculas.append("$sum", 1);
+            
+            Document MenorDuracion = new Document();
+            MenorDuracion.append("$first", "$minutos");
+            
+            Document MayorDuracion = new Document();
+            MayorDuracion.append("$last", "$minutos");
+
+            Document Promedio = new Document();
+            Promedio.append("$avg", "$minutos");
+            
+            Document PorBuscar = new Document();
+            PorBuscar.append("_id", "$companíaProductora");
+            PorBuscar.append("nombrePelicula",NumeroPeliculas);
+            PorBuscar.append("nombreDirector",MenorDuracion);
+            PorBuscar.append("genero",MayorDuracion);
+            PorBuscar.append("paisDeProduccion",Promedio);
+            
+            Document Group = new Document();
+            Group.append("$group", PorBuscar);
+            
+            
+            System.out.print("["+Match.toJson()+",");
+            System.out.println(Group.toJson()+"]");
+            
+            listaggregate.add(Group);
+            
+            resultado.add(MC.consultaE(listaggregate));
+        }
+        
+        
         DefaultTableModel dfm = (DefaultTableModel) jTable2.getModel();
 
         int filas = dfm.getRowCount();
         for (int i = 1; i <= filas; i++) {
             dfm.removeRow(0);
-        }
+        } 
 
         for (Document docs : resultado) {
-            dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
-                docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
-                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+            
+            String nombrePelicula = "";
+            String nombreDirector= "";
+            String genero = "";
+            String paisDeProduccion = "";
+            String franquicia = "";
+            String companíaProductora = "";
+            String actores = "";
+            String año = "";
+            String minutos = "";
+            
+            if(docs.containsKey("nombrePelicula")){
+                nombrePelicula = docs.get("nombrePelicula").toString();
+            } if(docs.containsKey("nombreDirector")){
+                nombreDirector = docs.get("nombreDirector").toString();
+            } if(docs.containsKey("genero")){
+                genero = docs.get("genero").toString();
+            } if(docs.containsKey("paisDeProduccion")){
+                paisDeProduccion = docs.get("paisDeProduccion").toString();
+            } if(docs.containsKey("franquicia")){
+                franquicia = docs.getString("franquicia");
+            } if(docs.containsKey("companíaProductora")){
+                companíaProductora = docs.getString("companíaProductora");
+            } if(docs.containsKey("actores")){
+                actores = docs.get("actores").toString();
+            } if(docs.containsKey("minutos")){
+                minutos = docs.getInteger("minutos")+"";
+            } if(docs.containsKey("año")){
+                año = docs.getInteger("año")+"";
+            }
+            
+            
+            dfm.addRow(new Object[]{nombrePelicula, nombreDirector,genero,paisDeProduccion, franquicia, companíaProductora,
+                año, minutos, actores});
         }
     }//GEN-LAST:event_jButton_consultarActionPerformed
+
+    private void jButton_Back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Back2ActionPerformed
+        Principal P = new Principal();
+        P.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_Back2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +416,9 @@ public class Consultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
+    private javax.swing.JButton jButton_Back1;
+    private javax.swing.JButton jButton_Back2;
     private javax.swing.JButton jButton_consultar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel_anio;

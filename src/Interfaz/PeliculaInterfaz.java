@@ -31,6 +31,7 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         jButton_D = new javax.swing.JButton();
         jButton_Peliculas2 = new javax.swing.JButton();
         jButton_R = new javax.swing.JButton();
+        jButton_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +63,13 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back.setText("...");
+        jButton_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +84,10 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
                     .addComponent(jButton_D, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                     .addComponent(jButton_Peliculas2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(123, 123, 123))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +100,9 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_R, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Peliculas2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jButton_Back)
+                .addContainerGap())
         );
 
         pack();
@@ -117,6 +131,12 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         U.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton_Peliculas2ActionPerformed
+
+    private void jButton_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BackActionPerformed
+        Principal P = new Principal();
+        P.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_BackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +174,7 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Back;
     private javax.swing.JButton jButton_C;
     private javax.swing.JButton jButton_D;
     private javax.swing.JButton jButton_Peliculas2;

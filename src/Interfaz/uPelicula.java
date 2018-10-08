@@ -60,6 +60,7 @@ public class uPelicula extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton_Filtrar = new javax.swing.JButton();
+        jButton_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +136,13 @@ public class uPelicula extends javax.swing.JFrame {
             }
         });
 
+        jButton_Back.setText("...");
+        jButton_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,7 +186,11 @@ public class uPelicula extends javax.swing.JFrame {
                                     .addComponent(jTextField_minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jTextField_companíaProductora, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel_actores)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel_actores)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jButton_Back, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -236,12 +248,18 @@ public class uPelicula extends javax.swing.JFrame {
                             .addComponent(jLabel_actores, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_Actualizar)
-                    .addComponent(jButton_Seleccionar)
-                    .addComponent(jButton_Filtrar))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_Actualizar)
+                            .addComponent(jButton_Seleccionar)
+                            .addComponent(jButton_Filtrar))
+                        .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Back)
+                        .addContainerGap())))
         );
 
         pack();
@@ -398,13 +416,26 @@ public class uPelicula extends javax.swing.JFrame {
         for (int i = 1; i <= filas; i++) {
             dfm.removeRow(0);
         }
+        
+        
 
         for (Document docs : F) {
+            String actores = "";
+            
+            if(docs.containsKey("actores")){
+                actores = docs.get("actores").toString();
+            }
             dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
                 docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
-                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+                docs.getInteger("año"), docs.getInteger("minutos"), actores});
         }
     }//GEN-LAST:event_jButton_FiltrarActionPerformed
+
+    private void jButton_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BackActionPerformed
+        PeliculaInterfaz PI = new PeliculaInterfaz();
+        PI.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton_BackActionPerformed
 
     private void refrescar() {
         MongoConnection MC = new MongoConnection();
@@ -420,9 +451,15 @@ public class uPelicula extends javax.swing.JFrame {
         }
 
         for (Document docs : F) {
+            String actores = "";
+            
+            if(docs.containsKey("actores")){
+                actores = docs.get("actores").toString();
+            }
             dfm.addRow(new Object[]{docs.getString("nombrePelicula"), docs.getString("nombreDirector"), docs.getString("genero"),
                 docs.getString("paisDeProduccion"), docs.getString("franquicia"), docs.getString("companíaProductora"),
-                docs.getInteger("año"), docs.getInteger("minutos"), docs.get("actores").toString()});
+                docs.getInteger("año"), docs.getInteger("minutos"), actores});
+            
         }
 
         Permitir = false;
@@ -578,6 +615,7 @@ public class uPelicula extends javax.swing.JFrame {
     private boolean Permitir = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Actualizar;
+    private javax.swing.JButton jButton_Back;
     private javax.swing.JButton jButton_Filtrar;
     private javax.swing.JButton jButton_Seleccionar;
     private javax.swing.JLabel jLabel_actores;
